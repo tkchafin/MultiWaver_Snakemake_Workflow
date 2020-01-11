@@ -1,0 +1,8 @@
+{
+  "full_name": "Tyler K. Chafin",
+  "email": "tylerkchafin@gmail.com",
+  "username": "tkchafin",
+  "project_name": "MultiWaver_Snakemake_Workflow",
+  "repo_name": "multiwaver_snakemake_workflow",
+  "min_snakemake_version": "3.12.0"
+}
