@@ -1,3 +1,3 @@
-# cookiecutter-snakemake-workflow
+# multiwaver_snakemake_workflow
 
-Cookiecutter template for snakemake workflows.
+Details coming soon
