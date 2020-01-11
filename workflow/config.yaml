@@ -1,3 +1,12 @@
 # This file should contain everything to configure the workflow on a global scale.
 # In case of sample based data, it should be complemented by a samples.tsv file that contains
 # one row per sample. It can be parsed easily via pandas.
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bioconda::snakemake-minimal =5.4.5
+  - python =3.6
+  - pyliftover
+  - csv
+  - pandas

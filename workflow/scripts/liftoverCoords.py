@@ -55,7 +55,7 @@ class parseArgs():
 	def __init__(self):
 		#Define options
 		try:
-			options, remainder = getopt.getopt(sys.argv[1:], 'hf:t:p:c:n:o:m', \
+			options, remainder = getopt.getopt(sys.argv[1:], 'hf:t:p:c:n:o:mj:', \
 			["help"])
 		except getopt.GetoptError as err:
 			print(err)

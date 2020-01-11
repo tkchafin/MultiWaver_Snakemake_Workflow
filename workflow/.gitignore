@@ -1,4 +1,6 @@
 *
+!data
+!data/*
 !scripts
 !scripts/*
 !scripts/common

@@ -7,11 +7,19 @@ report: "report/workflow.rst"
 # Allow users to fix the underlying OS via singularity.
 singularity: "docker://continuumio/miniconda3"
 
+
 # rules for updating genetic map and generating MareyMap inputs
 rule convert_map:
-    input:
-        "data/{basename}_coords.tsv"
-    output:
-        "data/{basename}_coords.new.tsv"
+	input:
+		"data/coords.tsv" 
+	output:
+		"data/coords.tsv.liftover"
+	params:
+		chainfile="data/canFam2ToCanFam3.over.chain.gz",
+		header_chrom="chr",
+		header_bp="bp",
+		out_header="liftover.bp"
+	shell:
+		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
 
 include: "rules/other.smk"
