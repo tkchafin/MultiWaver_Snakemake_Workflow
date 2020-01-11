@@ -7,6 +7,11 @@ report: "report/workflow.rst"
 # Allow users to fix the underlying OS via singularity.
 singularity: "docker://continuumio/miniconda3"
 
+reps = list(range(1,100))
+
+rule all:
+	input:
+		expand('data/rep_{rep}.seg', rep=reps)
 
 # rules for updating genetic map and generating MareyMap inputs
 rule convert_map:
@@ -21,5 +26,15 @@ rule convert_map:
 		out_header="liftover.bp"
 	shell:
 		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
+
+rule build_multiwave:
+	input:
+		"data/coords.tsv.liftover"
+	output:
+		"data/rep_{rep}.seg"
+	params:
+		Rdatapath="/Users/tyler/projects/red_wolf/liftover_coords"
+	shell:
+		"Rscript --vanilla scripts/table2liftover.R {output} {input} {params.Rdatapath}"
 
 include: "rules/other.smk"
