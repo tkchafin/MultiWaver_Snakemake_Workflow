@@ -7,13 +7,13 @@
         "nodes"     : 1,
         "jobs"      : 300,
         "ppn"       : 1,
-        "walltime"  : "30:00"
+        "time"  : "30:00"
     },
 
     "run_multiwave" :
     {
         "ppn"       : 16,
         "queue"     : "q72h32c",
-        "walltime"  : "36:00:00"
+        "time"  : "36:00:00"
     },
 }
