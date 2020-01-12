@@ -7,13 +7,14 @@
         "nodes"     : 1,
         "jobs"      : 300,
         "ppn"       : 1,
-        "time"  : "30:00"
+        "output"    : "SM.{rule}.out",
+        "walltime"  : "30:00"
     },
 
     "run_multiwave" :
     {
         "ppn"       : 16,
         "queue"     : "q72h32c",
-        "time"  : "36:00:00"
+        "walltime"  : "36:00:00"
     },
 }
