@@ -1,0 +1,58 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ############################################################
+> #   R script for converting ancestry breakpoints to centimorgans
+> #   & creating input files for 
+> ############################################################
+> 
+> library(ggplot2)
+> library(plyr)
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:plyr’:
+
+    arrange, count, desc, failwith, id, mutate, rename, summarise,
+    summarize
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> library(reshape2)
+> 
+> #setwd("~/projects/red_wolf/liftover_coords")
+> 
+> args = commandArgs(trailingOnly=TRUE)
+> 
+> if (length(args) < 3){
++   stop("Wrong number of inputs")
++ }else{
++   oname <- args[1]
++   liftover <- args[2]
++   fpath <- args[3]
++ }
+Error: Wrong number of inputs
+Execution halted
