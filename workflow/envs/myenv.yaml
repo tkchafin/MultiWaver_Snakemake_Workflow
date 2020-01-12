@@ -1,1 +1,17 @@
 # conda environments needed for the workflow should be stored here.
+channels:
+  - conda-forge
+  - bioconda
+  - r
+dependencies:
+  - bioconda::snakemake-minimal =5.4.5
+  - r
+  - r-base
+  - python =3.6
+  - pyliftover
+  - pandas
+  - r-plyr
+  - r-dplyr
+  - r-pracma
+  - r-ggplot2
+  - r-reshape2
