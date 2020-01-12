@@ -7,7 +7,7 @@ channels:
   - r
 dependencies:
   - bioconda::snakemake-minimal =5.4.5
-  - r =3.6.0
+  - r
   - python =3.6
   - pyliftover
   - pandas
