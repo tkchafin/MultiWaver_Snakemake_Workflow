@@ -14,8 +14,6 @@ rule all:
 		expand('data/rep_{rep}.seg', rep=reps),
 		expand('data/rep_{rep}.multiwave.out', rep=reps),
 		expand('data/rep_{rep}.multiwave.log', rep=reps)
-	conda:
-		"config.yaml"
 
 # rules for updating genetic map and generating MareyMap inputs
 rule convert_map:
@@ -29,6 +27,8 @@ rule convert_map:
 		header_bp="bp",
 		out_header="liftover.bp"
 	threads: 1
+	conda:
+		"config.yaml"
 	shell:
 		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
 
@@ -40,6 +40,8 @@ rule build_multiwave:
 	params:
 		Rdatapath="/Users/tyler/projects/red_wolf/liftover_coords"
 	threads: 1
+	conda:
+		"config.yaml"
 	shell:
 		"Rscript --vanilla scripts/table2multiwaver.R {output} {input} {params.Rdatapath}"
 
@@ -50,6 +52,8 @@ rule run_multiwave:
 		out="data/rep_{rep}.multiwave.out",
 		log="data/rep_{rep}.multiwave.log"
 	threads: 16
+	conda:
+		"config.yaml"
 	shell:
 		"~/MultiWaveInfer-2.0/bin/MultiWaveInfer2 -i {input} -o {output.out} --log {output.log} --waves 3 --bootstrap 100 --threads {threads}"
 
