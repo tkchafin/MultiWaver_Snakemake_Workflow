@@ -14,6 +14,8 @@ rule all:
 		expand('data/rep_{rep}.seg', rep=reps),
 		expand('data/rep_{rep}.multiwave.out', rep=reps),
 		expand('data/rep_{rep}.multiwave.log', rep=reps)
+	conda:
+		"config.yaml"
 
 # rules for updating genetic map and generating MareyMap inputs
 rule convert_map:
