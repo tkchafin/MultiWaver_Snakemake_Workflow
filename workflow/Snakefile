@@ -28,7 +28,6 @@ rule convert_map:
 		out_header="liftover.bp"
 	threads: 1
 	log:
-	log:
 		"logs/convert_map.log"
 	conda:
 		"envs/myenv.yaml"
