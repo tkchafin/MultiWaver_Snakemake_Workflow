@@ -3,10 +3,11 @@
 	{
 		"cluster"		: "qsub",
 		"queue"			: "bgee",
+		"job-name"	: "SM.{rule}",
 		"nodes"			: 1,
-		"jobs"			: 300,
+		"jobs"			: 100,
 		"ppn"				: 1,
-		"walltime"	: "10:00"
+		"walltime"	: "30:00"
 	},
 
 	"run_multiwave" :
