@@ -11,7 +11,9 @@ reps = list(range(1,100))
 
 rule all:
 	input:
-		expand('data/rep_{rep}.seg', rep=reps)
+		expand('data/rep_{rep}.seg', rep=reps),
+		expand('data/rep_{rep}.multiwave.out', rep=reps),
+		expand('data,rep_{rep}.multiwave.log', rep=reps)
 
 # rules for updating genetic map and generating MareyMap inputs
 rule convert_map:
@@ -35,6 +37,10 @@ rule build_multiwave:
 	params:
 		Rdatapath="/Users/tyler/projects/red_wolf/liftover_coords"
 	shell:
-		"Rscript --vanilla scripts/table2liftover.R {output} {input} {params.Rdatapath}"
+		"Rscript --vanilla scripts/table2multiwaver.R {output} {input} {params.Rdatapath}"
+
+rule run_multiwave:
+	shell:
+		"./MultiWaveInfer2 -i {input} -o {output} -w 3 -b 100 -t 32"
 
 include: "rules/other.smk"

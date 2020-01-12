@@ -12,16 +12,16 @@ library(reshape2)
 
 args = commandArgs(trailingOnly=TRUE)
 
-#if (length(args) < 3){
-#  stop("Wrong number of inputs")
-#}else{
-#  oname <- args[1]
-#  liftover <- args[2]
-#  fpath <- args[3]
-#}
-fpath<-"/Users/tyler/projects/red_wolf/liftover_coords"
-oname<-"data/rep_1.seg"
-liftover<-"data/coords.tsv.liftover"
+if (length(args) < 3){
+  stop("Wrong number of inputs")
+}else{
+  oname <- args[1]
+  liftover <- args[2]
+  fpath <- args[3]
+}
+#fpath<-"/Users/tyler/projects/red_wolf/liftover_coords"
+#oname<-"data/rep_1.seg"
+#liftover<-"data/coords.tsv.liftover"
 #oname<-paste0("rep_",rep,".seg")
 
 print(paste0("Output file will be called ",oname))
@@ -38,7 +38,7 @@ wolf_dat <- data.frame(matrix(ncol = 25, nrow = 0))
 #grab names of Rdata files (from trestles)
 print(paste0("Loading Rdata files from ", fpath, "... (this might take a while"))
 files<-list.files(path=fpath, pattern="*.Rdata", full.names=T)
-print(paste0("Found files: ", files))
+#print(paste0("Found files: ", files))
 #info <- file.info(files)
 #info$size_mb <- info$size/(1024 * 1024)
 #print(subset(info, select=c("size_mb")))
@@ -93,10 +93,6 @@ getChromId <- function(chrom){
 }
 
 
-for (rep in 1:100){
-
-  oname<-paste0("rep_",rep,".seg")
-  
 print("Computing ancestry assignments for each segment using a int.het cutoff of 0.5")
 wolf_dat["ASSIGN"] <- mapply(getHetRand, wolf_dat$sister, wolf_dat$int.het, 0.5)
 wolf_dat["ASSIGN2"] <- mapply(getHetExclude, wolf_dat$sister, wolf_dat$int.het, 0.5)
@@ -111,7 +107,7 @@ library(dplyr)
 otable<-data.frame("start"=numeric(), end=numeric(), ancestry=numeric())
 print("Interpolating cM positions")
 for (c in chroms){
-  print(c)
+  #print(c)
   
   first_row<-data.frame(c,1, 0.0000000, 1)
   names(first_row)<-c("chr","bp", "cM", "liftover.bp")
@@ -144,5 +140,4 @@ print("Writing output")
 write.table(otable, file=oname, append=F, quote=F, col.names=F,
             row.names=F, sep = "\t")
 
-}
 
