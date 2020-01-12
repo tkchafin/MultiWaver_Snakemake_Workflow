@@ -7,13 +7,13 @@ report: "report/workflow.rst"
 # Allow users to fix the underlying OS via singularity.
 singularity: "docker://continuumio/miniconda3"
 
-reps = list(range(1,100))
+reps = list(range(1,101))
 
 rule all:
 	input:
 		expand('data/rep_{rep}.seg', rep=reps),
 		expand('data/rep_{rep}.multiwave.out', rep=reps),
-		expand('data,rep_{rep}.multiwave.log', rep=reps)
+		expand('data/rep_{rep}.multiwave.log', rep=reps)
 
 # rules for updating genetic map and generating MareyMap inputs
 rule convert_map:
@@ -26,6 +26,7 @@ rule convert_map:
 		header_chrom="chr",
 		header_bp="bp",
 		out_header="liftover.bp"
+	threads: 1
 	shell:
 		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
 
@@ -36,11 +37,18 @@ rule build_multiwave:
 		"data/rep_{rep}.seg"
 	params:
 		Rdatapath="/Users/tyler/projects/red_wolf/liftover_coords"
+	threads: 1
 	shell:
 		"Rscript --vanilla scripts/table2multiwaver.R {output} {input} {params.Rdatapath}"
 
 rule run_multiwave:
+	input:
+		"data/rep_{rep}.seg"
+	output:
+		out="data/rep_{rep}.multiwave.out",
+		log="data/rep_{rep}.multiwave.log"
+	threads: 16
 	shell:
-		"./MultiWaveInfer2 -i {input} -o {output} -w 3 -b 100 -t 32"
+		"~/MultiWaveInfer-2.0/bin/MultiWaveInfer2 -i {input} -o {output.out} --log {output.log} --waves 3 --bootstrap 100 --threads {threads}"
 
 include: "rules/other.smk"
