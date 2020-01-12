@@ -33,7 +33,7 @@ rule convert_map:
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
+		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp} >> test.log"
 
 rule build_multiwave:
 	input:
@@ -41,7 +41,7 @@ rule build_multiwave:
 	output:
 		"data/rep_{rep}.seg"
 	params:
-		Rdatapath="./data"
+		Rdatapath="data"
 	threads: 1
 	log:
 		"logs/build_multiwave_{rep}.log"
