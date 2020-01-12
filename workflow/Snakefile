@@ -38,7 +38,7 @@ rule build_multiwave:
 	output:
 		"data/rep_{rep}.seg"
 	params:
-		Rdatapath="/Users/tyler/projects/red_wolf/liftover_coords"
+		Rdatapath="./data"
 	threads: 1
 	conda:
 		"config.yaml"
