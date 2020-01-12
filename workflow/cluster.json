@@ -1,15 +1,18 @@
 {
 	"__default__" :
 	{
-		"cluster"   : "qsub",
-		"nodes"	 : 1,
-		"jobs"	: 300,
-		"ppn"	   : 1
+		"cluster"		: "qsub",
+		"queue"			: "bgee",
+		"nodes"			: 1,
+		"jobs"			: 300,
+		"ppn"				: 1,
+		"walltime"	: "10:00"
 	},
 
 	"run_multiwave" :
 	{
-		"ppn"	   : 16
+		"ppn"	   		: 16,
+		"walltime"	: "30:00:00"
 	},
 
 }
