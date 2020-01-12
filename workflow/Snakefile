@@ -32,7 +32,7 @@ rule convert_map:
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"which python3; python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
+		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
 
 rule build_multiwave:
 	input:
