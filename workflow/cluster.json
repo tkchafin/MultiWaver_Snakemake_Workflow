@@ -5,7 +5,7 @@
 		"queue"			: "bgee",
 		"job-name"	: "SM.{rule}",
 		"nodes"			: 1,
-		"jobs"			: 100,
+		"jobs"			: 300,
 		"ppn"				: 1,
 		"walltime"	: "30:00"
 	},
@@ -13,7 +13,7 @@
 	"run_multiwave" :
 	{
 		"ppn"	   		: 16,
-		"walltime"	: "30:00:00"
+		"walltime"	: "36:00:00"
 	},
 
 }
