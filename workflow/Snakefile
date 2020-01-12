@@ -27,6 +27,9 @@ rule convert_map:
 		header_bp="bp",
 		out_header="liftover.bp"
 	threads: 1
+	log:
+	log:
+		"logs/convert_map.log"
 	conda:
 		"envs/myenv.yaml"
 	shell:
@@ -40,10 +43,12 @@ rule build_multiwave:
 	params:
 		Rdatapath="./data"
 	threads: 1
+	log:
+		"logs/build_multiwave_{rep}.log"
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"Rscript --vanilla scripts/table2multiwaver.R {output} {input} {params.Rdatapath}"
+		"R CMD BATCH scripts/table2multiwaver.R {output} {input} {params.Rdatapath}"
 
 rule run_multiwave:
 	input:
