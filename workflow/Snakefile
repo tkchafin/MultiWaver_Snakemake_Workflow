@@ -32,7 +32,7 @@ rule convert_map:
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp}"
+		"python3 scripts/liftoverCoords.py -t {input} -f {params.chainfile} -c {params.header_chrom} -n {params.out_header} -p {params.header_bp} 2&> {log}"
 
 rule build_multiwave:
 	input:
@@ -47,7 +47,7 @@ rule build_multiwave:
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"R CMD BATCH scripts/table2multiwaver.R {output} {input} {params.Rdatapath}"
+		"R CMD BATCH scripts/table2multiwaver.R {output} {input} {params.Rdatapath} 2&> {log}"
 
 rule run_multiwave:
 	input:
@@ -55,10 +55,12 @@ rule run_multiwave:
 	output:
 		out="data/rep_{rep}.multiwave.out",
 		log="data/rep_{rep}.multiwave.log"
+	log:
+		"logs/run_multiwave_{rep}.log"
 	threads: 16
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"~/MultiWaveInfer-2.0/bin/MultiWaveInfer2 -i {input} -o {output.out} --log {output.log} --waves 3 --bootstrap 100 --threads {threads}"
+		"~/MultiWaveInfer-2.0/bin/MultiWaveInfer2 -i {input} -o {output.out} --log {output.log} --waves 3 --bootstrap 100 --threads {threads} 2&> {log}"
 
 include: "rules/other.smk"
