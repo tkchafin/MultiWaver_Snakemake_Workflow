@@ -1,0 +1,15 @@
+{
+	"__default__" :
+	{
+		"cluster"   : "qsub",
+		"nodes"	 : 1,
+		"jobs"	: 300,
+		"ppn"	   : 1
+	},
+
+	"run_multiwave" :
+	{
+		"ppn"	   : 16
+	},
+
+}
