@@ -47,7 +47,7 @@ rule build_multiwave:
 	conda:
 		"envs/myenv.yaml"
 	shell:
-		"R CMD BATCH scripts/table2multiwaver.R {output} {input} {params.Rdatapath} 2&> {log}"
+		"R CMD BATCH scripts/table2multiwaver.R {output} {input} {params.Rdatapath} 2> {log}"
 
 rule run_multiwave:
 	input:
